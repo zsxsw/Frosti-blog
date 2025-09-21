@@ -1,0 +1,99 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { Icon } from "astro-icon/components";
+
+// 示例即刻短文数据
+const moments = [
+  {
+    id: 1,
+    content: "测试日记！",
+    date: "2025-09-20T12:40:00Z",
+    images: ["https://img.314926.xyz/images/2025/09/20/zsx-avatar.webp"],
+  },
+];
+
+// 时间格式化函数（中文）
+function formatTime(dateString: string): string {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
+
+  if (diffInMinutes < 60) return `${diffInMinutes} 分钟前`;
+  if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)} 小时前`;
+  return `${Math.floor(diffInMinutes / 1440)} 天前`;
+}
+---
+
+<BaseLayout title="即刻短文" description="记录瞬间">
+  <div class="grid grid-cols-1 gap-6 lg:gap-8">
+    <MainCard
+      title="即刻短文"
+      description="记录瞬间"
+      textOverlay="DIARY"
+      infoIcon="lucide:pen-tool"
+    >
+      <!-- 头部统计 -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">即刻短文</h2>
+          <p class="text-sm text-base-content/70 mt-1">记录瞬间，分享生活</p>
+        </div>
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">总数</div>
+            <div class="stat-value text-primary">{moments.length}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 时间线 -->
+      <div class="space-y-4">
+        {moments.map(moment => (
+          <article class="card card-bordered border-base-300 bg-base-100 p-4 md:p-6 hover:shadow-lg transition-shadow">
+            <!-- 内容 -->
+            <p class="text-base-content/90 leading-relaxed mb-4">
+              {moment.content}
+            </p>
+
+            <!-- 图片网格 -->
+            {moment.images && moment.images.length > 0 && (
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
+                {moment.images.map((img, i) => (
+                  <figure class="aspect-square rounded-lg overflow-hidden hover:scale-105 transition-transform">
+                    <img
+                      src={img}
+                      alt={`图片 ${i + 1}`}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            <!-- 分隔线 -->
+            <div class="divider my-2"></div>
+
+            <!-- 底部信息 -->
+            <div class="flex justify-between items-center text-sm text-base-content/60">
+              <div class="flex items-center gap-1.5">
+                <Icon name="lucide:clock" class="w-4 h-4" />
+                <time datetime={moment.date}>{formatTime(moment.date)}</time>
+              </div>
+              <div class="flex items-center gap-2">
+                <Icon name="lucide:image" class="w-4 h-4" />
+                <span>{moment.images?.length || 0} 张图</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- 底部提示 -->
+      <div class="text-center text-sm text-base-content/60 italic mt-8">
+        更多精彩，持续记录中...
+      </div>
+    </MainCard>
+  </div>
+</BaseLayout>

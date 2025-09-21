@@ -8,40 +8,40 @@ import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
 
 <BaseLayout title="Projects">
   <MainCard
-    title="Projects"
-    description="A showcase of my open-source projects and contributions on GitHub."
-    textOverlay="PROJECTS"
+    title="仓库"
+    description="我会在这里记录我觉得好用的项目~"
+    textOverlay="项目"
     infoIcon="lucide:code-2"
   >
     <!-- Featured Projects -->
     <section class="py-4">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <Icon name="lucide:star" class="w-6 h-6 text-primary" />
-        <span>Featured Projects</span>
+        <span>资源分享</span>
       </h2>
 
-      <GitHubStats username="EveSunMaple" repositoryName="Frosti" showLanguages={true} showContributors={true} />
+      <GitHubStats username="Kemeow815" repositoryName="kemiaofx" showLanguages={true} showContributors={true} />
     </section>
 
     <!-- My Repositories -->
     <section class="py-4">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <Icon name="lucide:folder" class="w-6 h-6 text-primary" />
-        <span>My Repositories</span>
+        <span>我的仓库</span>
       </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <RepositoryCard repo="EveSunMaple/Frosti" isPinned={true} />
-        <RepositoryCard repo="EveSunMaple/SaroProck" isPinned={true} />
-        <RepositoryCard repo="EveSunMaple/astion-static" />
+        <RepositoryCard repo="zsxsw/zsx-Frosti" isPinned={true} />
+        <RepositoryCard repo="zsxsw/cloud-mails" isPinned={true} />
+        <!-- <RepositoryCard repo="EveSunMaple/astion-static" />
         <RepositoryCard repo="EveSunMaple/astro-update-theme" />
         <RepositoryCard repo="EveSunMaple/Word-testing-application" />
-        <RepositoryCard repo="EveSunMaple/Smooth-Snake-Game" />
+        <RepositoryCard repo="EveSunMaple/Smooth-Snake-Game" /> -->
       </div>
 
       <div class="flex justify-center mt-10">
         <a
-          href="https://github.com/EveSunMaple?tab=repositories"
+          href="https://github.com/zsxsw?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn-outline gap-2"
@@ -53,7 +53,7 @@ import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
     </section>
 
     <!-- Open Source Contributions -->
-    <section class="py-4">
+    <!-- <section class="py-4">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
         <span>Open Source Contributions</span>
@@ -102,6 +102,6 @@ import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
           }
         </ul>
       </div>
-    </section>
+    </section> -->
   </MainCard>
 </BaseLayout>

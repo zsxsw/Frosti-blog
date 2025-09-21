@@ -7,11 +7,11 @@ import FeatureCard from "@/components/mdx/FeatureCard.astro";
 import GitHubStats from "@/components/mdx/GitHubStats.astro";
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="首页">
   <MainCard
-    title="Welcome to Frosti"
-    description="A modern, responsive, feature-rich blog theme for Astro with dark/light mode and customizable options."
-    textOverlay="HOME"
+    title="欢迎来到ZSX的小站~"
+    description="钟神秀的博客，致力于记录生活、资源分享和踩坑教程"
+    textOverlay="ZSX's Blog"
     infoIcon="lucide:info"
   >
     <div class="space-y-8">
@@ -21,27 +21,26 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
           <h1
             class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-loose"
           >
-            🌟 Frosti Blog Theme
+            ZSX 的小站
           </h1>
           <p class="text-xl text-base-content/80 max-w-3xl mb-8">
-            A minimal, responsive, and feature-rich Astro blog theme designed for creators who value beautiful content
-            presentation and exceptional performance.
+            这里是<strong>「钟神秀」</strong>的博客，致力于记录生活、资源分享和踩坑教程。在这里，你可以找到各种有趣的内容，包括但不限于技术文章、生活分享、资源推荐等。欢迎来我的小站，一起分享生活的点滴，共同成长，有什么需求和建议可以在侧栏的邮箱找我！
           </p>
           <div class="flex flex-wrap gap-4 justify-center">
             <a href="/blog" class="btn btn-primary gap-2 btn-shine-effect">
               <Icon name="lucide:book-open" class="w-5 h-5" />
-              <span>Explore Blog</span>
+              <span>我的博文</span>
             </a>
-            <a href="https://github.com/EveSunMaple/Frosti" target="_blank" class="btn btn-outline gap-2">
-              <Icon name="lucide:github" class="w-5 h-5" />
-              <span>Star on GitHub</span>
+            <a href="https://t.me/zhzsx_channel" target="_blank" class="btn btn-outline gap-2">
+              <Icon name="mdi:telegram" class="w-5 h-5" />
+              <span>关注我的电报频道~</span>
             </a>
           </div>
         </div>
       </section>
 
       <!-- Features Section -->
-      <section class="py-6">
+      <!-- <section class="py-6">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
           <Icon name="lucide:sparkles" class="w-6 h-6 text-primary" />
           <span>Features</span>
@@ -93,7 +92,7 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
       </section>
 
       <!-- Quick Start -->
-      <section class="py-6">
+      <!-- <section class="py-6">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
           <Icon name="lucide:rocket" class="w-6 h-6 text-primary" />
           <span>Quick Start</span>
@@ -116,9 +115,9 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
                 <p class="text-base-content/70 mb-2">Use Git to clone the Frosti repository to your local machine:</p>
                 <Code code="git clone --depth 1 https://github.com/EveSunMaple/Frosti.git Frosti" lang="sh" />
               </div>
-            </li>
+            </li> -->
 
-            <li class="relative flex flex-col gap-4 items-start">
+            <!-- <li class="relative flex flex-col gap-4 items-start">
               <div class="flex gap-4 items-center">
                 <div
                   class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content flex-shrink-0"
@@ -156,16 +155,16 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
             >
           </div>
         </div>
-      </section>
+      </section> -->
 
       <!-- GitHub Stats -->
       <section class="py-6">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
           <Icon name="lucide:github" class="w-6 h-6 text-primary" />
-          <span>Repository Stats</span>
+          <span>博客源码</span>
         </h2>
 
-        <GitHubStats username="EveSunMaple" repositoryName="Frosti" showLanguages={true} showContributors={true} />
+        <GitHubStats username="zsxsw" repositoryName="zsx-Frosti" showLanguages={true} showContributors={true} />
       </section>
     </div>
   </MainCard>

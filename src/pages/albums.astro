@@ -1,0 +1,152 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import Card from "@/components/temple/Card.astro";
+import CardGroup from "@/components/temple/CardGroup.astro";
+
+// 导入相册数据
+import { albums } from "@/data/albums.js";
+---
+
+<BaseLayout title="Photo Album">
+  <!-- 灯箱模态框结构 -->
+  <div id="lightbox-modal" class="hidden fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <button id="close-lightbox" class="absolute top-4 right-4 text-white text-3xl hover:text-primary transition-colors">
+      &times;
+    </button>
+    <div class="relative max-w-[90vw] max-h-[90vh]">
+      <img id="lightbox-image" class="max-h-[80vh] max-w-full object-contain" src="" alt="">
+      <div id="lightbox-caption" class="text-white text-center mt-2 px-4"></div>
+    </div>
+  </div>
+
+  <CardGroup cols="1">
+    <MainCard
+      title="Photo Albums"
+      description="A collection of my favorite photos and memories."
+      textOverlay="ALBUMS"
+      infoIcon="lucide:image"
+    >
+      <div class="space-y-10">
+        {albums.map(album => (
+          <section>
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+              <Icon name="lucide:album" class="w-6 h-6 text-primary" />
+              <span>{album.title}</span>
+            </h2>
+            
+            <p class="text-base-content/70 mb-6">{album.description}</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {album.images.map((image) => (
+                <div 
+                  class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                  onclick={`showLightbox('${image.url}', '${image.alt || ''}', '${image.title || ''}', '${image.description || ''}')`}
+                >
+                  <figure class="aspect-square overflow-hidden">
+                    <img 
+                      src={image.url} 
+                      alt={image.alt || album.title} 
+                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </figure>
+                  <div class="card-body p-4">
+                    {image.title && <h3 class="card-title text-sm">{image.title}</h3>}
+                    {image.description && <p class="text-xs text-base-content/70">{image.description}</p>}
+                    {image.date && <p class="text-xs text-base-content/50">{image.date}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </MainCard>
+    
+    <Card>
+      <div class="p-4 sm:p-6">
+        <div class="flex flex-col items-center gap-4 text-center">
+          <Icon name="lucide:camera" class="w-10 h-10 text-primary" />
+          <h2 class="text-xl font-bold">Share Your Photos</h2>
+          <p class="text-base-content/70">
+            Want to contribute to my photo albums? Feel free to suggest new photos or albums!
+          </p>
+        </div>
+      </div>
+    </Card>
+  </CardGroup>
+</BaseLayout>
+
+<style>
+  figure {
+    border-radius: 0.5rem 0.5rem 0 0;
+    overflow: hidden;
+  }
+  
+  .card {
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* 灯箱动画效果 */
+  #lightbox-modal {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  #lightbox-modal.show {
+    opacity: 1;
+  }
+</style>
+
+<script is:inline>
+  // 显示灯箱
+  function showLightbox(src, alt, title, description) {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-image');
+    const caption = document.getElementById('lightbox-caption');
+    
+    img.src = src;
+    img.alt = alt;
+    
+    let captionHTML = '';
+    if (title) captionHTML += `<h3 class="text-lg font-bold">${title}</h3>`;
+    if (description) captionHTML += `<p class="text-sm">${description}</p>`;
+    caption.innerHTML = captionHTML;
+    
+    modal.classList.remove('hidden');
+    setTimeout(() => modal.classList.add('show'), 10);
+    
+    // 阻止背景滚动
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // 关闭灯箱
+  document.getElementById('close-lightbox').addEventListener('click', () => {
+    const modal = document.getElementById('lightbox-modal');
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 300);
+  });
+  
+  // 点击背景关闭
+  document.getElementById('lightbox-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('lightbox-modal')) {
+      document.getElementById('close-lightbox').click();
+    }
+  });
+  
+  // ESC键关闭
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !document.getElementById('lightbox-modal').classList.contains('hidden')) {
+      document.getElementById('close-lightbox').click();
+    }
+  });
+</script>

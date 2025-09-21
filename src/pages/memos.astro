@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<BaseLayout title="Memos">
+  <div class="grid grid-cols-1 gap-6 lg:gap-8">
+    <MainCard
+      title="碎碎念"
+      description="临时想法、简短记录与日常吐槽。"
+      textOverlay="MEMOS"
+      infoIcon="lucide:message-circle"
+    >
+      <div id="qexoDaoDao" class="mt-6" />
+      <p id="memo-loading" class="text-sm text-base-content/60">
+        <Icon name="lucide:loader-2" class="inline w-4 h-4 animate-spin mr-2" />
+        正在加载…
+      </p>
+    </MainCard>
+  </div>
+
+  <!-- ① 先让浏览器把 UMD 脚本挂到全局 -->
+  <script src="/js/qexo-dao.min.js" is:inline></script>
+
+  <!-- ② 初始化（Astro 会打包成独立 chunk，确保上面脚本已执行） -->
+  <script>
+    // 等待 DOM 和 CDN 脚本都就绪
+    function initMemos() {
+      if (typeof (window as any).qexoDaodao === "undefined") {
+        // 如果 CDN 还没回来，稍后重试
+        setTimeout(initMemos, 200);
+        return;
+      }
+
+      (window as any).qexoDaodao
+        .init({
+          el: "#qexoDaoDao",
+          avatar: "https://img.314926.xyz/images/2025/09/20/zsx-avatar.webp",
+          name: "钟神秀",
+          limit: 10,
+          useLoadingImg: true,
+          baseURL: "https://qexo.kemeow.top/",
+        })
+        .then(() => {
+          document.getElementById("memo-loading")?.remove();
+          console.log("[memos] qexoDaodao 加载完成");
+        })
+        .catch((e: any) => {
+          console.error("[memos] 初始化失败", e);
+          document.getElementById("memo-loading")!.textContent =
+            "加载失败，请刷新重试";
+        });
+    }
+
+    initMemos();
+  </script>
+</BaseLayout>

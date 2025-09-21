@@ -1,0 +1,224 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { Icon } from "astro-icon/components";
+
+/* 追番数据 */
+const animeList = [
+  {
+    title: "怪奇物语",
+    status: "watching",
+    rating: 9.7,
+    cover: "https://img.314926.xyz/images/2025/08/16/guaiqiwuyu.webp",
+    description: "80年代小镇男孩失踪引发超自然谜案",
+    episodes: "8 episodes",
+    year: "2016-2026",
+    link: "https://www.bilibili.com/video/BV1pTJNzQE1T/",
+    progress: 12,
+    totalEpisodes: 12,
+    genre: ["科幻", "惊悚"],
+    startDate: "2016",
+    endDate: "2026",
+  },
+
+//   {
+//     title: "Yowamushi Pedal",
+//     status: "watching",
+//     rating: 9.5,
+//     cover: "/assets/anime/rynh.webp",
+//     description: "Girl's daily life, sweet and healing",
+//     episodes: "12 episodes",
+//     year: "2015",
+//     genre: ["Daily life", "Healing"],
+//     studio: "Nexus",
+//     link: "https://www.bilibili.com/bangumi/media/md2590",
+//     progress: 8,
+//     totalEpisodes: 12,
+//     startDate: "2015-07",
+//     endDate: "2015-09",
+//   },
+//   {
+//     title: "Asteroid in Love",
+//     status: "watching",
+//     rating: 9.2,
+//     cover: "/assets/anime/laxxx.webp",
+//     description: "Meeting girls among the stars, pure love and healing",
+//     episodes: "12 episodes",
+//     year: "2020",
+//     genre: ["Romance", "Healing"],
+//     studio: "Doga Kobo",
+//     link: "https://www.bilibili.com/bangumi/media/md28224128",
+//     progress: 5,
+//     totalEpisodes: 12,
+//     startDate: "2020-01",
+//     endDate: "2020-03",
+//   },
+//   {
+//     title: "Is the Order a Rabbit?",
+//     status: "completed",
+//     rating: 9.0,
+//     cover: "/assets/anime/tz1.webp",
+//     description: "A group of girls' warm daily life",
+//     episodes: "12 episodes",
+//     year: "2014",
+//     genre: ["Daily life", "Healing"],
+//     studio: "White Fox",
+//     link: "https://www.bilibili.com/bangumi/media/md2762",
+//     progress: 12,
+//     totalEpisodes: 12,
+//     startDate: "2014-04",
+//     endDate: "2014-06",
+//   },
+//   {
+//     title: "The Secret of the Magic Girl",
+//     status: "watching",
+//     rating: 9.0,
+//     cover: "/assets/anime/cmmn.webp",
+//     description: "Muli, Muli!",
+//     episodes: "12 episodes",
+//     year: "2024",
+//     genre: ["Daily life", "Healing", "Magic"],
+//     studio: "C2C",
+//     link: "https://www.bilibili.com/bangumi/media/md26625039",
+//     progress: 8,
+//     totalEpisodes: 12,
+//     startDate: "2025-07",
+//     endDate: "2025-10",
+//   },
+];
+
+/* 状态中文映射 + 样式 */
+function getStatusInfo(status: string) {
+  switch (status) {
+    case "watching":
+      return { text: "在看", class: "badge badge-success", icon: "lucide:play" };
+    case "completed":
+      return { text: "完结", class: "badge badge-info", icon: "lucide:check" };
+    case "planned":
+      return { text: "计划", class: "badge badge-warning", icon: "lucide:clock" };
+    default:
+      return { text: status, class: "badge badge-ghost", icon: "lucide:help-circle" };
+  }
+}
+
+/* 统计数据 */
+const stats = {
+  total: animeList.length,
+  watching: animeList.filter(a => a.status === "watching").length,
+  completed: animeList.filter(a => a.status === "completed").length,
+  avgRating: (animeList.reduce((s, a) => s + a.rating, 0) / animeList.length).toFixed(1),
+};
+---
+
+<BaseLayout title="追番">
+  <div class="grid grid-cols-1 gap-6 lg:gap-8">
+    <MainCard
+      title="追番"
+      description="番剧记录与碎碎念"
+      textOverlay="ANIME"
+      infoIcon="lucide:tv"
+    >
+      <!-- 统计卡片 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">总计</div>
+            <div class="stat-value text-primary">{stats.total}</div>
+          </div>
+        </div>
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">在看</div>
+            <div class="stat-value text-success">{stats.watching}</div>
+          </div>
+        </div>
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">完结</div>
+            <div class="stat-value text-info">{stats.completed}</div>
+          </div>
+        </div>
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">均分</div>
+            <div class="stat-value text-orange-500">{stats.avgRating}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 番剧网格 -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+        {animeList.map(anime => {
+          const status = getStatusInfo(anime.status);
+          const percent = Math.round((anime.progress / anime.totalEpisodes) * 100);
+          return (
+            <div class="card card-bordered hover:shadow-xl transition-shadow">
+              <figure class="relative aspect-[2/3]">
+                <img
+                  src={anime.cover}
+                  alt={anime.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* 状态徽章 */}
+                <div class="absolute top-2 left-2">
+                  <div class={`badge gap-1 ${status.class}`}>
+                    <Icon name={status.icon} class="w-3 h-3" />
+                    {status.text}
+                  </div>
+                </div>
+                {/* 评分 */}
+                <div class="absolute top-2 right-2 badge badge-sm gap-1 bg-black/70 text-white border-0">
+                  <Icon name="lucide:star" class="w-3 h-3 text-yellow-400" />
+                  {anime.rating}
+                </div>
+                {/* 进度条（在看才显示） */}
+                {anime.status === "watching" && (
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+                    <div class="w-full bg-white/20 rounded h-1 mb-1">
+                      <div
+                        class="bg-gradient-to-r from-emerald-400 to-teal-400 h-1 rounded"
+                        style={`width: ${percent}%`}
+                      />
+                    </div>
+                    <div class="text-white text-xs">
+                      {anime.progress}/{anime.totalEpisodes} ({percent}%)
+                    </div>
+                  </div>
+                )}
+              </figure>
+
+              <div class="card-body p-3">
+                <h3 class="card-title text-sm">{anime.title}</h3>
+                <p class="text-xs text-base-content/70 line-clamp-2">{anime.description}</p>
+
+                <div class="flex justify-between text-xs mt-2">
+                  <span>{anime.year}</span>
+                  <span>{anime.episodes}</span>
+                </div>
+
+                <div class="flex flex-wrap gap-1 mt-2">
+                  {anime.genre.map(g => (
+                    <div class="badge badge-outline badge-xs">{g}</div>
+                  ))}
+                </div>
+
+                <div class="card-actions justify-end mt-2">
+                  <a
+                    href={anime.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary btn-sm gap-1"
+                  >
+                    去观看
+                    <Icon name="lucide:external-link" class="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </MainCard>
+  </div>
+</BaseLayout>

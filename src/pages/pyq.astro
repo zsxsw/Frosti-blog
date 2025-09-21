@@ -1,0 +1,55 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<BaseLayout title="朋友圈">
+  <div class="grid grid-cols-1 gap-6 lg:gap-8">
+    <MainCard
+      title="朋友圈"
+      description="聚合友链 RSS 最新动态，轻量实时。"
+      textOverlay="PYQ"
+      infoIcon="lucide:activity"
+    >
+      <!-- Lite 容器 -->
+      <div id="friend-circle-lite-root" class="mt-6">
+        <p class="text-sm text-base-content/60">
+          <Icon name="lucide:loader-2" class="inline w-4 h-4 animate-spin mr-2" />
+          与主机通讯中……
+        </p>
+      </div>
+    </MainCard>
+  </div>
+
+  <!-- 1. 配置变量（先于组件脚本） -->
+  <script is:inline define:vars={{}}>
+    window.UserConfig = {
+      private_api_url: "https://fc.kemeow.top/",   // 尾部空格已删
+      page_turning_number: 24,
+      error_img: "https://pic.imgdb.cn/item/6695daa4d9c307b7e953ee3d.jpg",
+    };
+  </script>
+
+  <!-- 2. Lite 样式 -->
+  <link
+    rel="stylesheet"
+    href="https://fastly.jsdelivr.net/gh/willow-god/Friend-Circle-Lite/main/fclite.min.css"
+  />
+
+  <!-- 3. Lite 脚本（UMD，自动渲染 #friend-circle-lite-root） -->
+  <script
+    src="https://fastly.jsdelivr.net/gh/willow-god/Friend-Circle-Lite/main/fclite.min.js"
+  ></script>
+
+  <!-- 4. 兜底：5s 未渲染完成则提示超时 -->
+  <script>
+    setTimeout(() => {
+      const root = document.querySelector("#friend-circle-lite-root");
+      if (root && root.textContent?.includes("与主机通讯中")) {
+        root.innerHTML =
+          `<p class="text-sm text-error">加载超时，请检查网络或刷新页面重试。</p>`;
+      }
+    }, 5000);
+  </script>
+</BaseLayout>

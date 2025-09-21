@@ -7,8 +7,8 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
 
 <BaseLayout title="About">
   <MainCard
-    title="About SunMaple"
-    description="Developer, open-source enthusiast, and creator of the Frosti blog theme."
+    title="关于 钟神秀"
+    description="一个 普通人/大学生/博客写作者/资源分享者/小说狂热爱好者"
     textOverlay="ABOUT"
     infoIcon="lucide:user"
   >
@@ -19,17 +19,17 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
           <div
             class="w-32 h-32 md:w-40 md:h-40 rounded-xl ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden"
           >
-            <img src="https://github.com/EveSunMaple.png" alt="SunMaple" width="160" height="160" loading="eager" />
+            <img src="https://img.314926.xyz/images/2025/09/20/zsx-avatar.webp" alt="钟神秀" width="160" height="160" loading="eager" />
           </div>
         </div>
 
         <div class="flex-1 text-center md:text-left">
-          <h1 class="text-3xl md:text-4xl font-bold mb-2">SunMaple</h1>
-          <p class="text-xl text-base-content/80 mb-4">Developer & Open-Source Enthusiast</p>
+          <h1 class="text-3xl md:text-4xl font-bold mb-2">钟神秀</h1>
+          <p class="text-xl text-base-content/80 mb-4">大学生 & 博客写作者</p>
 
           <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
             <a
-              href="https://github.com/EveSunMaple"
+              href="https://github.com/sxsw"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-sm btn-outline gap-2"
@@ -38,25 +38,24 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
               <span>GitHub</span>
             </a>
             <a
-              href="https://twitter.com/EveSunMaple"
+              href="https://t.me/zhzsx_me"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-sm btn-outline gap-2"
             >
-              <Icon name="lucide:twitter" class="w-4 h-4" />
+              <Icon name="mdi:telegram" class="w-4 h-4" />
               <span>Twitter</span>
             </a>
-            <a href="mailto:evesunmaple@outlook.com" class="btn btn-sm btn-outline gap-2">
+            <a href="mailto:zsx@zhzsx.cn" class="btn btn-sm btn-outline gap-2">
               <Icon name="lucide:mail" class="w-4 h-4" />
               <span>Email</span>
             </a>
           </div>
 
           <p class="text-base-content/80">
-            Hello! I'm SunMaple, a passionate developer focused on creating elegant, responsive, and efficient web
-            applications. I'm the creator of the Frosti blog theme, a modern Astro-based theme for content creators. I
-            love contributing to open-source projects and building tools that help others create beautiful digital
-            experiences.
+            &emsp;&emsp;Hello👋！欢迎来到<strong>「钟神秀」</strong>的小站！我是一名普通的大学生，在南京一所普通大学就读。没什么实力，专业自动化，因机缘巧合下接触到资源分享和博客写作，于是对此兴趣盎然。因此搭建这个博客。<br>
+            &emsp;&emsp;我在这个博客分享我<strong>搜集</strong>(<s>破解</s>)的各种资源，包括但不限于安卓软件、电脑软件和网站以及各种项目等等，弃用IOS，不会可以找这方面资源，想要的请<a href="mailto:zsx@zhzsx.cn" target="_blank" rel="noopener noreferrer">邮箱</a>找我。<br>
+            &emsp;&emsp;我本人不破解以及相关活动，我分享的资源有来源的都会尽力寻找出处，如果我的文章/分享影响了您的权益，请联系我删除，同样，你有什么想我分享的，也可以邮箱找我~
           </p>
         </div>
       </section>
@@ -65,17 +64,17 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
       <section>
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
           <Icon name="lucide:github" class="w-6 h-6 text-primary" />
-          <span>GitHub Statistics</span>
+          <span>GitHub 账户信息</span>
         </h2>
 
-        <GitHubStats username="EveSunMaple" showLanguages={false} showCommitGraph={true} />
+        <GitHubStats username="zsxsw" showLanguages={false} showCommitGraph={true} />
       </section>
 
       <!-- Tech Stack -->
       <section>
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
           <Icon name="lucide:code-2" class="w-6 h-6 text-primary" />
-          <span>Tech Stack</span>
+          <span>对以下技术有粗浅的认识</span>
         </h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -90,8 +89,8 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
               { name: "HTML5", icon: "simple-icons:html5", color: "oklch(0.7 0.2 30)" },
               { name: "CSS3", icon: "simple-icons:css3", color: "oklch(0.7 0.2 220)" },
               { name: "Git", icon: "simple-icons:git", color: "oklch(0.7 0.2 30)" },
-              { name: "C++", icon: "simple-icons:cplusplus", color: "oklch(0.6 0.2 240)" },
-              { name: "C#", icon: "simple-icons:csharp", color: "oklch(0.6 0.2 160)" },
+              // { name: "C++", icon: "simple-icons:cplusplus", color: "oklch(0.6 0.2 240)" },
+              // { name: "C#", icon: "simple-icons:csharp", color: "oklch(0.6 0.2 160)" },
               { name: "Python", icon: "simple-icons:python", color: "oklch(0.7 0.2 250)" },
             ].map((tech) => (
               <div class="flex flex-col items-center justify-center p-4 bg-base-200 rounded-lg hover:bg-base-300 transition-colors">
@@ -109,7 +108,7 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
       <section>
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
           <Icon name="lucide:activity" class="w-6 h-6 text-primary" />
-          <span>Recent Activity</span>
+          <span>心路历程</span>
         </h2>
 
         <div class="bg-base-200 rounded-xl p-6 overflow-x-auto">
@@ -117,25 +116,25 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
             {
               [
                 {
-                  date: "January 2024",
-                  title: "Open Source Contributions",
-                  desc: "Contributed to several open source projects, focusing on performance optimizations.",
+                  date: "2024年11月",
+                  title: "接触博客",
+                  desc: "在电报深受资源分享前辈的影响，开始了资源分享，然后开始尝试写博客。",
                 },
                 {
-                  date: "March 2024",
-                  title: "Initiated Frosti Project",
-                  desc: "Started development of the Frosti blog theme for Astro, focusing on modern design principles.",
+                  date: "2024年11月至2025年9月",
+                  title: "分享了一些软件，写了一些文章",
+                  desc: "在不同的频道里探索资源，抽空写一些文章而已。",
                 },
                 {
-                  date: "July 2024",
-                  title: "Released Frosti v2",
-                  desc: "Published version 2 with improved responsive design and extended plugin support.",
+                  date: "024年11月至2025年9月",
+                  title: "部署的博客经历",
+                  desc: "从一开始的Hexo，到Hugo、vitepress、vuepress、astro到nuxt等等博客框架，与今天(09.19)开始搭建这个博客。",
                 },
-                {
-                  date: "March 2025",
-                  title: "Released Frosti v3",
-                  desc: "Launched version 3 of the Frosti blog theme with enhanced performance and new customization options.",
-                },
+                // {
+                //   date: "March 2025",
+                //   title: "Released Frosti v3",
+                //   desc: "Launched version 3 of the Frosti blog theme with enhanced performance and new customization options.",
+                // },
               ].map((item, i) => (
                 <div class="relative flex gap-4 pb-2 md:pb-0 md:min-w-[250px]">
                   <div class="flex flex-col items-center">
