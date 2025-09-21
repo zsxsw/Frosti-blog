@@ -102,7 +102,7 @@ site:
 user:
   name: 钟神秀 # 用户名
   site: "https://blog.zhzsx.cn/" # 用户的网站链接
-  avatar: https://img.314926.xyz/images/2025/09/20/zsx-avatar.webp # 用户头像路径
+  avatar: /avatar.png # 用户头像路径
   sidebar: # 侧边栏配置
     social:
       - href: "https://qr-pay.kemeow.top/" # 链接
